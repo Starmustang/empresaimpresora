@@ -26,5 +26,16 @@ namespace empresaimpresora.Servicios
             await _context.SaveChangesAsync();
             return empresa;
         }
+        public async Task<bool> DeleteEmpresaAsync(Guid id)
+        {
+            var empresa = await _context.Empresas.FindAsync(id);
+            if (empresa != null)
+            {
+                _context.Empresas.Remove(empresa);
+                await _context.SaveChangesAsync();
+                return true;
+            }
+            return false;
+        }
     }
 }
