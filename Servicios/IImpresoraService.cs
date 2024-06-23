@@ -7,5 +7,7 @@ namespace empresaimpresora.Servicios
         Task<IEnumerable<Impresora>> GetImpresoraAsync();
         Task<Impresora> GetImpresoraByIdAsync(Guid id);
         Task<Impresora> AddImpresoraAsync(Impresora impresora);
+
+        Task<bool> DeleteImpresoraAsync(Guid id);
     }
 }

@@ -8,5 +8,7 @@ namespace empresaimpresora.Servicios
         Task<Empresa> GetEmpresaByIdAsync(Guid id);
         Task<Empresa> AddEmpresaAsync(Empresa empresa);
 
+        Task<bool> DeleteEmpresaAsync(Guid id);
+
     }
 }

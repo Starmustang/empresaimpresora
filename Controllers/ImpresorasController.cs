@@ -1,4 +1,5 @@
 using empresaimpresora.Models;
+using empresaimpresora.Servicios;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -8,35 +9,46 @@ namespace empresaimpresora.Controllers
     [ApiController]
     public class ImpresorasController: ControllerBase
     {
-        private readonly ApplicationDbcontext _context;
+        private readonly IImpresoraService _impresoraService;
 
-        public ImpresorasController(ApplicationDbcontext context){
-            _context = context;
+        public ImpresorasController(IImpresoraService impresoraService){
+            _impresoraService = impresoraService;
         }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Impresora>>> GetImpresoras(){
-            return await _context.impresoras.Include(i =>i.Empresa).ToListAsync();
+            var impresoras = await _impresoraService.GetImpresoraAsync();
+            return Ok(impresoras);
         }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Impresora>> GetImpresora(Guid id){
 
-            var impresora = await _context.impresoras.Include(i =>i.Empresa).FirstOrDefaultAsync(i =>i.ImpresoraId == id);
-
+            var impresora = await _impresoraService.GetImpresoraByIdAsync(id);
             if (impresora == null)
             {
                 return NotFound();
             }
-            return impresora;
+            return Ok(impresora);
         }
         [HttpPost]
         public async Task<ActionResult<Impresora>> PostImpresora(Impresora impresora){
-            impresora.ImpresoraId = Guid.NewGuid();
-            _context.impresoras.Add(impresora);
-            await _context.SaveChangesAsync();
+            
+            var nuevaImpresora = await _impresoraService.AddImpresoraAsync(impresora);
 
-            return CreatedAtAction(nameof(GetImpresora), new {id = impresora.ImpresoraId});
+            return CreatedAtAction(nameof(GetImpresora), new {id = nuevaImpresora.ImpresoraId}, nuevaImpresora);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteImpresora(Guid id){
+
+            var impresora = await _impresoraService.DeleteImpresoraAsync(id);
+
+            if (!impresora)
+            {
+                return NotFound();
+            }            
+            return NoContent();
         }
     }
 }

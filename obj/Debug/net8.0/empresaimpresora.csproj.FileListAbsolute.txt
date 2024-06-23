@@ -139,3 +139,4 @@ D:\Desarrollo trabajo\empresaimpresora\bin\Debug\net8.0\NSwag.Core.Yaml.dll
 D:\Desarrollo trabajo\empresaimpresora\bin\Debug\net8.0\NSwag.Generation.dll
 D:\Desarrollo trabajo\empresaimpresora\bin\Debug\net8.0\NSwag.Generation.AspNetCore.dll
 D:\Desarrollo trabajo\empresaimpresora\bin\Debug\net8.0\YamlDotNet.dll
+D:\Desarrollo trabajo\empresaimpresora\obj\Debug\net8.0\empresaimpresora.sourcelink.json
