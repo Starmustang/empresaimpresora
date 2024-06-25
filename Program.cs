@@ -11,7 +11,7 @@ builder.Services.AddDbContext<ApplicationDbcontext>(opt => opt.UseSqlite("Data S
 builder.Services.AddScoped<IEmpresaService, EmpresaService>();
 builder.Services.AddScoped<IImpresoraService, ImpresoraService>();
 //builder.Services.AddScoped<IHelloworldService, HelloworldService>();
-builder.Services.AddScoped<IHelloworldService>(p=> new HelloworldService());//esta forma de hacerlo podria agregarle parametros
+//builder.Services.AddScoped<IHelloworldService>(p=> new HelloworldService());//esta forma de hacerlo podria agregarle parametros
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
