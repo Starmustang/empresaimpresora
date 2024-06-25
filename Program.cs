@@ -1,4 +1,5 @@
 using empresaimpresora;
+using empresaimpresora.Middlewares;
 using empresaimpresora.Servicios;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,6 +10,8 @@ builder.Services.AddControllers();
 builder.Services.AddDbContext<ApplicationDbcontext>(opt => opt.UseSqlite("Data Source=midb.db"));
 builder.Services.AddScoped<IEmpresaService, EmpresaService>();
 builder.Services.AddScoped<IImpresoraService, ImpresoraService>();
+//builder.Services.AddScoped<IHelloworldService, HelloworldService>();
+builder.Services.AddScoped<IHelloworldService>(p=> new HelloworldService());//esta forma de hacerlo podria agregarle parametros
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
@@ -24,6 +27,10 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
+
+//app.UseWelcomePage();
+
+//app.UseTimeMiddleware();
 
 app.MapControllers();
 
